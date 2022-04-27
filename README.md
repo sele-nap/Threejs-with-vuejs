@@ -1,4 +1,4 @@
-# chair-tuto
+# threejs-with-vuejs
 
 ## Project setup
 ```
