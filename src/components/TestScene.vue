@@ -5,6 +5,7 @@
 import * as THREE from "three";
 // import SceneInit from "../lib/SceneInit";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export default {
   name: "ProductView",
@@ -93,34 +94,27 @@ export default {
       this.scene.add(hemiLight);
 
       // Adding gtlf model
-      //   let loader = new GLTFLoader();
-      //   loader.load(
-      //     this.modelSettings.link,
-      //     data => {
-      //       var object = data.scene;
-      //       object.position.set(0,0,0);
-      //       if(this.modelSettings.scale) object.scale.set(this.modelSettings.scale, this.modelSettings.scale, this.modelSettings.scale);
-      //       this.scene.add(object);
-      //       this.renderScene();
-      //     }
-      //   );
+      let loader = new GLTFLoader();
+      loader.load("../3DModel/Cat.glb", function (gltf) {
+        this.scene.add(gltf.scene);
+      });
 
       //texture
 
-      const brickTexture = new THREE.TextureLoader().load(
-        "../assets/brick.jpeg"
-      );
+      // const brickTexture = new THREE.TextureLoader().load(
+      //   "../assets/brick.jpeg"
+      // );
 
-      //Add an object
-      const groundGeometry = new THREE.SphereGeometry(4);
-      const groundMaterial = new THREE.MeshStandardMaterial({
-        map: brickTexture,
-      });
-      const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
-      groundMesh.receiveShadow = true;
-      groundMesh.position.y = -2;
-      this.scene.add(groundMesh);
-      this.animate();
+      // //Add an object
+      // const groundGeometry = new THREE.SphereGeometry(4);
+      // const groundMaterial = new THREE.MeshStandardMaterial({
+      //   map: brickTexture,
+      // });
+      // const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
+      // groundMesh.receiveShadow = true;
+      // groundMesh.position.y = -2;
+      // this.scene.add(groundMesh);
+      // this.animate();
     },
 
     renderScene() {
