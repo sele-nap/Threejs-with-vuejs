@@ -8,7 +8,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export default {
-  name: "ProductView",
+  name: "TestScene",
   data() {
     return {
       scene: undefined,
@@ -26,6 +26,18 @@ export default {
       const BACKGROUND_COLOR = "pink";
       this.scene = new THREE.Scene();
       this.scene.background = new THREE.Color(BACKGROUND_COLOR);
+
+      // Adding gtlf model
+      let loader = new GLTFLoader();
+
+      loader.load(
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/chair.glb",
+        (data) => {
+          let object = data.scene;
+          object.position.set(0, 0, 0);
+          this.scene.add(object);
+        }
+      );
 
       //initialize renderer
       this.renderer = new THREE.WebGLRenderer({
@@ -93,12 +105,6 @@ export default {
       // Ajoute une lumière hémisphérique à la scène
       this.scene.add(hemiLight);
 
-      // Adding gtlf model
-      let loader = new GLTFLoader();
-      loader.load("../3DModel/Cat.glb", function (gltf) {
-        this.scene.add(gltf.scene);
-      });
-
       //texture
 
       // const brickTexture = new THREE.TextureLoader().load(
@@ -114,7 +120,7 @@ export default {
       // groundMesh.receiveShadow = true;
       // groundMesh.position.y = -2;
       // this.scene.add(groundMesh);
-      // this.animate();
+      this.animate();
     },
 
     renderScene() {
