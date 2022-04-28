@@ -29,15 +29,11 @@ export default {
 
       // Adding gtlf model
       let loader = new GLTFLoader();
-
-      loader.load(
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/chair.glb",
-        (data) => {
-          let object = data.scene;
-          object.position.set(0, 0, 0);
-          this.scene.add(object);
-        }
-      );
+      loader.load("/3DModel/Cat.glb", (data) => {
+        let object = data.scene;
+        object.position.set(0, 0, 0);
+        this.scene.add(object);
+      });
 
       //initialize renderer
       this.renderer = new THREE.WebGLRenderer({
