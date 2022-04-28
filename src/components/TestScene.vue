@@ -27,12 +27,20 @@ export default {
       this.scene = new THREE.Scene();
       this.scene.background = new THREE.Color(BACKGROUND_COLOR);
 
+      //add texture on cat
+      //   let txt =
+
       // Adding gtlf model
       let loader = new GLTFLoader();
       loader.load("/3DModel/Cat.glb", (data) => {
         let object = data.scene;
         object.position.set(0, 0, 0);
-        this.scene.add(object);
+        let material = new THREE.MeshBasicMaterial({
+          map: new THREE.TextureLoader().load("/assets/brick.jpeg"),
+        });
+        // object.material = txt;
+
+        this.scene.add(object, material);
       });
 
       //initialize renderer
