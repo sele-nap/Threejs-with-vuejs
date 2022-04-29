@@ -24,14 +24,31 @@ export default {
       this.scene.background = new THREE.Color(BACKGROUND_COLOR);
 
       //add texture on cat
+      const TextureLoader = new THREE.TextureLoader();
+      const spaceTexture = TextureLoader.load("/assets/space.jpg");
+      const marsTexture = new THREE.TextureLoader().load("./assets/mars.jpeg");
+
+      //test sphere
+      const ge3 = new THREE.SphereGeometry(4);
+      const me3 = new THREE.MeshStandardMaterial({
+        map: marsTexture,
+      });
+      const sphereMe3 = new THREE.Mesh(ge3, me3);
+      sphereMe3.position.x = -9;
+      sphereMe3.position.y = 5;
+      this.scene.add(sphereMe3);
 
       // Adding gtlf model
       let loader = new GLTFLoader();
       loader.load("/3DModel/Cat.glb", (data) => {
+        new THREE.MeshStandardMaterial({
+          map: spaceTexture,
+        });
+        console.log(spaceTexture);
         let object = data.scene;
         object.position.set(0, 0, 0);
         let material = new THREE.MeshBasicMaterial({
-          map: new THREE.TextureLoader().load("/assets/brick.jpeg"),
+          map: new THREE.TextureLoader().load("/assets/space.jpg"),
         });
 
         this.scene.add(object, material);
@@ -106,7 +123,7 @@ export default {
       //texture
 
       // const spaceTexture = new THREE.TextureLoader().load(
-      //   "../assets/space.jpg"
+      //   "../assets/mars.jpeg"
       // );
 
       // //Add an object
