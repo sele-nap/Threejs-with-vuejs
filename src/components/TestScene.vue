@@ -18,17 +18,12 @@ export default {
   },
   methods: {
     init() {
-      // const test = new SceneInit("myThreeJsCanvas");
-      // test.initialize();
-      // test.animate();
-
       //initialize scene and background
       const BACKGROUND_COLOR = "pink";
       this.scene = new THREE.Scene();
       this.scene.background = new THREE.Color(BACKGROUND_COLOR);
 
       //add texture on cat
-      //   let txt =
 
       // Adding gtlf model
       let loader = new GLTFLoader();
@@ -38,7 +33,6 @@ export default {
         let material = new THREE.MeshBasicMaterial({
           map: new THREE.TextureLoader().load("/assets/brick.jpeg"),
         });
-        // object.material = txt;
 
         this.scene.add(object, material);
       });
@@ -111,14 +105,14 @@ export default {
 
       //texture
 
-      // const brickTexture = new THREE.TextureLoader().load(
-      //   "../assets/brick.jpeg"
+      // const spaceTexture = new THREE.TextureLoader().load(
+      //   "../assets/space.jpg"
       // );
 
       // //Add an object
       // const groundGeometry = new THREE.SphereGeometry(4);
       // const groundMaterial = new THREE.MeshStandardMaterial({
-      //   map: brickTexture,
+      //   map: spaceTexture,
       // });
       // const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
       // groundMesh.receiveShadow = true;
