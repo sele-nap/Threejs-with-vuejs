@@ -19,13 +19,11 @@ export default {
   methods: {
     init() {
       //initialize scene and background
-      const BACKGROUND_COLOR = "pink";
+      const BACKGROUND_COLOR = "lightblue";
       this.scene = new THREE.Scene();
       this.scene.background = new THREE.Color(BACKGROUND_COLOR);
 
-      //add texture on cat
-      const TextureLoader = new THREE.TextureLoader();
-      const spaceTexture = TextureLoader.load("/assets/space.jpg");
+      //const TextureLoader = new THREE.TextureLoader();
       const marsTexture = new THREE.TextureLoader().load("./assets/mars.jpeg");
 
       //test sphere
@@ -34,24 +32,19 @@ export default {
         map: marsTexture,
       });
       const sphereMe3 = new THREE.Mesh(ge3, me3);
-      sphereMe3.position.x = -9;
-      sphereMe3.position.y = 5;
+      sphereMe3.position.x = -200;
+      sphereMe3.position.y = 200;
+      sphereMe3.scale.set(10, 10, 10);
       this.scene.add(sphereMe3);
 
       // Adding gtlf model
       let loader = new GLTFLoader();
-      loader.load("/3DModel/Cat.glb", (data) => {
-        new THREE.MeshStandardMaterial({
-          map: spaceTexture,
-        });
-        console.log(spaceTexture);
-        let object = data.scene;
-        object.position.set(0, 0, 0);
-        let material = new THREE.MeshBasicMaterial({
-          map: new THREE.TextureLoader().load("/assets/space.jpg"),
-        });
-
-        this.scene.add(object, material);
+      loader.load("/3DModel/Cat/scene.gltf", (gltfScene) => {
+        // gltfScene.scene.rotation.y = Math.PI / 8;
+        // gltfScene.scene.position.y = 3;
+        gltfScene.scene.scale.set(1, 1, 1);
+        this.scene.add(gltfScene.scene);
+        console.log(gltfScene.scenes);
       });
 
       //initialize renderer
@@ -88,7 +81,7 @@ export default {
       floor.receiveShadow = true;
       floor.position.y = -10;
       this.scene.add(floor);
-      this.camera.position.set(0, 0, 16);
+      this.camera.position.set(100, 100, 100);
 
       //Adding controls
       const controls = new OrbitControls(this.camera, this.renderer.domElement);
